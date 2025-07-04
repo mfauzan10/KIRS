@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Approvals List</title>
+    <style>
+        :root {
+            --color-primary: #36C0D1;
+            --color-secondary: #A9E7ED;
+            --color-success: #2BB3A3;
+            --color-danger: #E57373;
+            --color-bg: #FFFFFF;
+            --color-text: #333333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--color-primary);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background-color: #f0f0f0;
+            border-radius: 0.5rem 0.5rem 0 0;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        .tab:hover {
+            background-color: #e0e0e0;
+        }
+
+        .tab.active {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        /* Tab content */
+        .tab-content {
+            display: none;
+            border: 2px solid var(--color-primary);
+            border-radius: 0 0 0.5rem 0.5rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9f9f9;
+        }
+
+        /* Attachment Button */
+        .attachment-button {
+            background-color: var(--color-primary);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s ease;
+        }
+
+        .attachment-button:hover {
+            background-color: #2aa7ba;
+        }
+
+        /* Search Box */
+        .search-container {
+            margin: 1rem 0;
+            text-align: right;
+        }
+
+        .search-container input {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ccc;
+            width: 250px;
+        }
+
+        /* Icon Button */
+        .icon-button {
+            background-color: var(--color-primary);
+            border: none;
+            color: white;
+            font-size: 1rem;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Progress */
+        .progress-container {
+            position: relative;
+            height: 16px;
+            background-color: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 100px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: -1.6rem;
+            font-size: 0.8rem;
+            color: var(--color-text);
+            left: 0;
+        }
+
+        /* Action buttons */
+        .action-button {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border: none;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            margin-right: 0.4rem;
+        }
+
+        .action-button.detail {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .action-button.delete {
+            background-color: var(--color-danger);
+            color: white;
+        }
+
+        .action-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>All Approvals</h1>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <a class="tab active" onclick="showTab(event, 'pending')">Pending</a>
+        <a class="tab" onclick="showTab(event, 'approved')">Approved</a>
+        <a class="tab" onclick="showTab(event, 'rejected')">Rejected</a>
+        <a class="tab" onclick="showTab(event, 'draft')">Draft</a>
+    </div>
+
+    <!-- Tab Content -->
+    <!-- PENDING -->
+    <div id="pending" class="tab-content active">
+        <h2>Pending Approvals</h2>
+        <div class="search-container">
+            <input type="text" placeholder="Search approvals..." />
+        </div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Attachment</th>
+                <th>Progress</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Proposal X</td>
+                <td>2025-07-03</td>
+                <td><button class="attachment-button">📎</button></td>
+                <td>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 60%;"></div><span class="progress-text">3/5</span>
+                    </div>
+                </td>
+                <td><button class="action-button detail">Detail</button><button
+                        class="action-button delete">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Budget Review Q1</td>
+                <td>2025-07-04</td>
+                <td><button class="attachment-button">📎</button></td>
+                <td>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 40%;"></div><span class="progress-text">2/5</span>
+                    </div>
+                </td>
+                <td><button class="action-button detail">Detail</button><button
+                        class="action-button delete">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- APPROVED -->
+    <div id="approved" class="tab-content">
+        <h2>Approved Items</h2>
+        <div class="search-container">
+            <input type="text" placeholder="Search approvals..." />
+        </div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Attachment</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Form Y</td>
+                <td>2025-06-25</td>
+                <td><button class="attachment-button">📎</button></td>
+                <td>
+                    approved at <br>
+                    4 July 2025
+                </td>
+                <td><button class="action-button detail">Detail</button><button
+                        class="action-button delete">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Annual Report</td>
+                <td>2025-06-20</td>
+                <td><button class="attachment-button">📎</button></td>
+                <td>
+                    approved at <br>
+                    1 July 2025
+                </td>
+                <td><button class="action-button detail">Detail</button><button
+                        class="action-button delete">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- REJECTED -->
+    <div id="rejected" class="tab-content">
+        <h2>Rejected Submissions</h2>
+        <div class="search-container">
+            <input type="text" placeholder="Search approvals..." />
+        </div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Attachment</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Old Draft Z</td>
+                <td>2025-06-20</td>
+                <td><button class="attachment-button">📎</button></td>
+                <td>
+                    Rejected at <br>
+                    1 January 2025
+                </td>
+                <td><button class="action-button detail">Detail</button><button
+                        class="action-button delete">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Denied Memo</td>
+                <td>2025-06-18</td>
+                <td><button class="attachment-button">📎</button></td>
+                <td>
+                    Rejected at <br>
+                    10 January 2025
+                </td>
+                <td><button class="action-button detail">Detail</button><button
+                        class="action-button delete">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- DRAFT -->
+    <div id="draft" class="tab-content">
+        <h2>Draft Approvals</h2>
+        <div class="search-container">
+            <input type="text" placeholder="Search approvals..." />
+        </div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Attachment</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Document A</td>
+                <td>2025-07-01</td>
+                <td><button class="attachment-button">📎</button></td>
+                <td>
+                    draft
+                </td>
+                <td><button class="action-button detail">Detail</button><button
+                        class="action-button delete">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Initial Plan B</td>
+                <td>2025-07-02</td>
+                <td><button class="attachment-button">📎</button></td>
+                <td>
+                    draft
+                </td>
+                <td><button class="action-button detail">Detail</button><button
+                        class="action-button delete">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Simple Tab Switcher -->
+    <script>
+        function showTab(event, tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+
+            // Activate selected tab
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+
+</body>
+
+</html>
