@@ -75,8 +75,12 @@
         <input type="text" id="judul" name="judul" required />
       </div>
       <div class="form-group">
-        <label for="file">File Penelitian (PDF)</label>
-        <input type="file" id="file" name="file" accept=".pdf" required />
+        <label for="file">File Permohonan (PDF)</label>
+        <input type="file" id="file_permohonan" name="file_permohonan" accept=".pdf" required />
+      </div>
+      <div class="form-group">
+        <label for="file">File Proposal (PDF)</label>
+        <input type="file" id="file_proposal" name="file_proposal" accept=".pdf" required />
       </div>
       <button type="submit">Kirim</button>
     </form>

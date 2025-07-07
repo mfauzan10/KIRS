@@ -45,7 +45,6 @@
 </head>
 <body>
 
-  <!-- Login Form -->
   <div class="login-container">
     <div class="login-box">
       <h2>Login</h2>
@@ -61,6 +60,10 @@
         <button type="submit" class="btn w-100" style="background-color: #36C0D1; color: white; font-weight: bold;">
           Login
         </button>
+        <div class="text-center mt-3">
+          <span>Belum punya akun? </span>
+          <a href="views/researcher/daftar.php" style="color: #36C0D1; font-weight: bold;">Daftar di sini</a>
+        </div>
       </form>
     </div>
   </div>

@@ -4,7 +4,7 @@
     {
         if ($_POST['password'] == "123")
         {
-            header("Location: ../Views/researcher/dashboard.php");
+            header("Location: ../views/researcher/dashboard.php");
         }
         else 
         {
