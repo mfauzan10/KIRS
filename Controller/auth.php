@@ -11,5 +11,12 @@
             header("Location: ../index.php");
         }
     }
+    else if ($_POST['username'] == "approval") {
+    if ($_POST['password'] == "123")
+    {
+        header("Location: ../views/approval/dashboard.php");
+    }
+
+}
 
 ?>
