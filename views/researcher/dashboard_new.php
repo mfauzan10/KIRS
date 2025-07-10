@@ -90,12 +90,12 @@
 <body>
 
   <div class="container">
-    <h2>Selamat Datang, Peneliti</h2>
+    <h2>Selamat Datang Researcher</h2>
 
     <div class="status-box">
       <strong>Status Penelitian Terbaru:</strong>
       Judul: <em>Studi Efektivitas Obat ABC</em><br>
-      Status: <span class="badge siap-unggah">Menunggu Dokumen Etik</span><br><br>
+      Status: <span class="badge siap-unggah">Exempted</span><br><br>
       <a href="form_etik.php" class="action-button">Unggah Dokumen Etik</a>
     </div>
 
@@ -113,35 +113,35 @@
         <tr>
           <td>Studi Efektivitas Obat ABC</td>
           <td>05 Juli 2025</td>
-          <td><span class="badge siap-unggah">Menunggu Dokumen</span></td>
+          <td><span class="badge siap-unggah">Exempted</span></td>
           <td><a href="detil_penelitian.php?id=1" class="action-button">Lihat Detail</a></td>
         </tr>
 
         <tr>
           <td>Pengaruh Pola Tidur Mahasiswa</td>
           <td>04 Juli 2025</td>
-          <td><span class="badge submitted">Submitted</span></td>
+          <td><span class="badge submitted">Expedited</span></td>
           <td><a href="detil_penelitian.php?id=2" class="action-button">Lihat Detail</a></td>
         </tr>
 
         <tr>
           <td>Evaluasi Kualitas Tidur Pasien Rawat Inap</td>
           <td>03 Juli 2025</td>
-          <td><span class="badge dinilai">Menunggu Penilaian</span></td>
+          <td><span class="badge dinilai">Exempted</span></td>
           <td><a href="detil_penelitian.php?id=3" class="action-button">Lihat Detail</a></td>
         </tr>
 
         <tr>
           <td>Analisis Gaya Hidup Pasien Diabetes</td>
           <td>20 Juni 2025</td>
-          <td><span class="badge disetujui">Disetujui</span></td>
+          <td><span class="badge disetujui">Full Board</span></td>
           <td><a href="detil_penelitian.php?id=4" class="action-button">Lihat Detail</a></td>
         </tr>
 
         <tr>
           <td>Evaluasi Sistem Pelayanan Gizi di Rumah Sakit</td>
           <td>06 Juli 2025</td>
-          <td><span class="badge revisi">Revisi</span></td>
+          <td><span class="badge revisi">Discontinuing</span></td>
           <td><a href="detil_penelitian.php?id=5" class="action-button">Lihat Detail</a></td>
         </tr>
       </tbody>

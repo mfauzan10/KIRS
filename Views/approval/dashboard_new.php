@@ -90,7 +90,7 @@
 <body>
 
   <div class="container">
-    <h2>Selamat Datang, Approval</h2>
+    <h2>Selamat Datang Approval</h2>
 
     <div class="status-box">
       <strong>Status Penelitian Terbaru:</strong>

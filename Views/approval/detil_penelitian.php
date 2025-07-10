@@ -280,8 +280,8 @@ $activeStep = $stepMap[$data['status']] ?? 1;
         }
 
         .action-buttons {
-            display: flex;
-            gap: 15px;
+            display: flex; justify-content: center; align-items: center
+            gap: 200px;
         }
 
         .btn-approve {
@@ -493,7 +493,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                     Status Saat Ini: <strong>Exempted</strong>
                 </div>
 
-                <div class="status-update">
+                <!-- <div class="status-update">
                     <label for="status-select">Pilih Status Baru:</label>
                     <select id="status-select" class="status-select">
                         <option value="">-- Pilih Status --</option>
@@ -502,9 +502,9 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                         <option value="full-board">Full Board</option>
                         <option value="discontinuing">Discontinuing</option>
                     </select>
-                </div>
+                </div> -->
 
-                <div class="status-descriptions">
+                <!-- <div class="status-descriptions">
                     <h4>📝 Keterangan Status:</h4>
                     <ul>
                         <li><strong>Exempted:</strong> Penelitian dinyatakan layak dan diterbitkan surat kelayakan etik</li>
@@ -512,27 +512,21 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                         <li><strong>Full Board:</strong> Pemohon dijadwalkan untuk presentasi di hadapan Komisi Etik Penelitian Kesehatan</li>
                         <li><strong>Discontinuing:</strong> Usulan tidak disetujui secara etik dan dapat diajukan ulang setelah direvisi</li>
                     </ul>
+                </div> -->
+
+                <div class="comment-section">
+                    <label for="comment">Catatan:</label>
+                    <textarea id="comment" class="comment-textarea" placeholder="Berikan catatan atau komentar untuk peneliti..."></textarea>
                 </div>
 
-                <!-- <div class="comment-section">
-                    <label for="comment">Catatan/Komentar:</label>
-                    <textarea id="comment" class="comment-textarea" placeholder="Berikan catatan atau komentar untuk peneliti..."></textarea>
-                </div> -->
-
-                <!-- <div class="action-buttons">
-                    <button class="btn btn-approve" onclick="approveResearch()">
-                        <svg class="icon" viewBox="0 0 24 24">
+                <div class="action-buttons">
+                    <button class="btn btn-approve">
+                        <!-- <svg class="icon" viewBox="0 0 24 24">
                             <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
-                        </svg>
+                        </svg> -->
                         Kirim
                     </button>
-                    <button class="btn btn-reject" onclick="rejectResearch()">
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
-                        </svg>
-                        Batal
-                    </button>
-                </div> -->
+                </div>
             </div>
         </div>
 
@@ -549,7 +543,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                 </div>
                 <div class="progress-step">
                     <div class="progress-circle">3</div>
-                    <div class="progress-label">Penilaian</div>
+                    <div class="progress-label">Pelunasan Biaya</div>
                 </div>
                 <div class="progress-step">
                     <div class="progress-circle">4</div>

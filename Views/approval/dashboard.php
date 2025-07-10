@@ -204,19 +204,19 @@
       background: var(--color-pending);
     }
 
-    .dot.approved {
+    .dot.exempted {
       background: var(--color-success);
     }
 
-    .dot.rejected {
+    .dot.discontinuing {
       background: var(--color-danger);
     }
 
-    .dot.fullboard {
+    .dot.full_board {
       background: var(--color-fullboard);
     }
 
-    .dot.assempted,
+    .dot.expedited,
     .dot.accepted {
       background: var(--color-warning);
     }
@@ -246,7 +246,7 @@
       <!-- Left column -->
       <div class="left-column">
         <div class="welcome-card">
-          <h2>Welcome, Researcher!</h2>
+          <h2>Welcome Approval!</h2>
           <p>Here’s your current approval overview.</p>
         </div>
 
@@ -258,22 +258,22 @@
           <div class="card approved filled-card">
             <h2>Exempted</h2> 
             <!-- Jika penelitian langsung disetujui -->
-            <p>1 item(s)</p>
+            <p>2 item(s)</p>
           </div>
           <div class="card fullboard filled-card">
             <h2>Expedited</h2>
             <!-- Jika penelitian ada revisi -->
-            <p>0 item(s)</p>
+            <p>1 item(s)</p>
           </div>
           <div class="card assempted filled-card">
             <h2>Full Board</h2>
             <!-- Penelitian memerlukan presentasi -->
-            <p>0 item(s)</p>
+            <p>1 item(s)</p>
           </div>
           <div class="card rejected filled-card">
             <h2>Discontinuing</h2>
             <!-- Jika penelitian ditolak -->
-            <p>0 item(s)</p>
+            <p>1 item(s)</p>
           </div>
         </div>
 
@@ -287,10 +287,10 @@
           <div class="pie"></div>
           <div class="legend">
             <div class="legend-item"><span class="dot pending"></span> Pending</div>
-            <div class="legend-item"><span class="dot approved"></span> </div>
-            <div class="legend-item"><span class="dot fullboard"></span> Fullboard</div>
-            <div class="legend-item"><span class="dot assempted"></span> Assempted</div>
-            <div class="legend-item"><span class="dot rejected"></span> Rejected</div>
+            <div class="legend-item"><span class="dot exempted"></span> Exempted</div>
+            <div class="legend-item"><span class="dot expedited"></span> Expedited</div>
+            <div class="legend-item"><span class="dot full_board"></span> Full Board</div>
+            <div class="legend-item"><span class="dot discontinuing"></span> Discontinuing</div>
           </div>
         </div>
       </div>

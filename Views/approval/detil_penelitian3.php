@@ -601,7 +601,7 @@
                 </div>
                 <div class="progress-step">
                     <div class="progress-circle">3</div>
-                    <div class="progress-label">Full Board Review</div>
+                    <div class="progress-label">Pelunasan Biaya</div>
                 </div>
                 <div class="progress-step">
                     <div class="progress-circle">4</div>

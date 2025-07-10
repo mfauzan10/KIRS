@@ -204,19 +204,19 @@
       background: var(--color-pending);
     }
 
-    .dot.approved {
+    .dot.exempted {
       background: var(--color-success);
     }
 
-    .dot.rejected {
+    .dot.discontinuing {
       background: var(--color-danger);
     }
 
-    .dot.fullboard {
+    .dot.full_board {
       background: var(--color-fullboard);
     }
 
-    .dot.assempted,
+    .dot.expedited,
     .dot.accepted {
       background: var(--color-warning);
     }
@@ -239,7 +239,7 @@
 
 <body>
 
-  <h1>Approval Dashboard</h1>
+  <h1>Researcher Dashboard</h1>
 
   <section class="section-card">
     <div class="section-grid">
@@ -258,22 +258,22 @@
           <div class="card approved filled-card">
             <h2>Exempted</h2> 
             <!-- Jika penelitian langsung disetujui -->
-            <p>1 item(s)</p>
+            <p>2 item(s)</p>
           </div>
           <div class="card fullboard filled-card">
             <h2>Expedited</h2>
             <!-- Jika penelitian ada revisi -->
-            <p>0 item(s)</p>
+            <p>1 item(s)</p>
           </div>
           <div class="card assempted filled-card">
             <h2>Full Board</h2>
             <!-- Penelitian memerlukan presentasi -->
-            <p>0 item(s)</p>
+            <p>1 item(s)</p>
           </div>
           <div class="card rejected filled-card">
             <h2>Discontinuing</h2>
             <!-- Jika penelitian ditolak -->
-            <p>0 item(s)</p>
+            <p>1 item(s)</p>
           </div>
         </div>
 
@@ -289,7 +289,7 @@
             <div class="legend-item"><span class="dot pending"></span> Pending</div>
             <div class="legend-item"><span class="dot exempted"></span> Exempted</div>
             <div class="legend-item"><span class="dot expedited"></span> Expedited</div>
-            <div class="legend-item"><span class="dot full board"></span> Full Board</div>
+            <div class="legend-item"><span class="dot full_board"></span> Full Board</div>
             <div class="legend-item"><span class="dot discontinuing"></span> Discontinuing</div>
           </div>
         </div>
