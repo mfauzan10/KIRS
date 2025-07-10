@@ -12,11 +12,10 @@
         }
     }
     else if ($_POST['username'] == "approval") {
-    if ($_POST['password'] == "123")
-    {
-        header("Location: ../views/approval/dashboard.php");
+        if ($_POST['password'] == "123")
+        {
+            header("Location: ../views/approval/dashboard.php");
+        }
     }
-
-}
 
 ?>

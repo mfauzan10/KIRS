@@ -287,10 +287,10 @@
           <div class="pie"></div>
           <div class="legend">
             <div class="legend-item"><span class="dot pending"></span> Pending</div>
-            <div class="legend-item"><span class="dot approved"></span> </div>
-            <div class="legend-item"><span class="dot fullboard"></span> Fullboard</div>
-            <div class="legend-item"><span class="dot assempted"></span> Assempted</div>
-            <div class="legend-item"><span class="dot rejected"></span> Rejected</div>
+            <div class="legend-item"><span class="dot exempted"></span> Exempted</div>
+            <div class="legend-item"><span class="dot expedited"></span> Expedited</div>
+            <div class="legend-item"><span class="dot full board"></span> Full Board</div>
+            <div class="legend-item"><span class="dot discontinuing"></span> Discontinuing</div>
           </div>
         </div>
       </div>

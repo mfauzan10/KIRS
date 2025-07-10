@@ -1,50 +1,3 @@
-<?php
-$id = $_GET['id'] ?? null;
-
-$penelitianList = [
-  1 => [
-    'judul' => 'Studi Efektivitas Obat ABC',
-    'nama' => 'Muhammad Fauzan',
-    'file' => '1720000000_proposal_efektivitas_obat_abc.pdf',
-    'status' => 'siap-unggah',
-  ],
-  2 => [
-    'judul' => 'Pengaruh Pola Tidur Mahasiswa',
-    'nama' => 'Fanny Septi Nurcahyani',
-    'file' => '1720000001_tidur_mahasiswa.pdf',
-    'status' => 'submitted',
-  ],
-  3 => [
-    'judul' => 'Evaluasi Kualitas Tidur Pasien Rawat Inap',
-    'nama' => 'Rasyiddin Permana',
-    'file' => '1720000002_kualitas_tidur.pdf',
-    'status' => 'dinilai',
-  ],
-  4 => [
-    'judul' => 'Analisis Gaya Hidup Pasien Diabetes',
-    'nama' => 'Fanny Septi Nurcahyani',
-    'file' => '1720000003_gaya_hidup.pdf',
-    'status' => 'selesai',
-  ],
-  5 => [
-    'judul' => 'Evaluasi Sistem Pelayanan Gizi di Rumah Sakit',
-    'nama' => 'Muhammad Fauzan',
-    'file' => '1720000003_sistem_pelayanan_gizi.pdf',
-    'status' => 'revisi',
-  ],
-];
-
-if (!isset($penelitianList[$id])) {
-  echo "Penelitian tidak ditemukan.";
-  exit;
-}
-
-$data = $penelitianList[$id];
-
-$stepMap = ['submitted' => 1, 'siap-unggah' => 2, 'dinilai' => 3, 'selesai' => 4, 'revisi' => 5];
-$activeStep = $stepMap[$data['status']] ?? 1;
-?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -311,7 +264,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             margin-top: 25px;
         }
 
-        .progress-section h1 {
+        .progress-section h3 {
             color: #2c3e50;
             margin-bottom: 20px;
             font-size: 1.5em;
@@ -426,23 +379,24 @@ $activeStep = $stepMap[$data['status']] ?? 1;
     <div class="container">
         <div class="header">
             <h1>🔍 Detail Penelitian</h1>
+            <p></p>
         </div>
 
         <div class="main-content">
             <div class="detail-card">
                 <div class="detail-row">
                     <div class="detail-label">Nama Peneliti:</div>
-                    <div class="detail-value">Muhammad Fauzan</div>
+                    <div class="detail-value">Fanny Septi Nurcahyani</div>
                 </div>
                 
                 <div class="detail-row">
                     <div class="detail-label">Judul Penelitian:</div>
-                    <div class="detail-value">Studi Efektivitas Obat ABC</div>
+                    <div class="detail-value">Pengaruh Pola Tidur Mahasiswa</div>
                 </div>
 
                 <div class="detail-row">
-                    <div class="detail-label">Tanggal:</div>
-                    <div class="detail-value">05 Juli 2025</div>
+                    <div class="detail-label">Tanggal</div>
+                    <div class="detail-value">06 Juli 2025</div>
                 </div>
                 
                 <div class="detail-row">
@@ -465,7 +419,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                     </div>
                 </div>
                 
-                <div class="detail-row">
+                <!-- <div class="detail-row">
                     <div class="detail-label">Unggah Dokumen Etik:</div>
                     <div class="detail-value">
                         <div class="file-actions">
@@ -473,7 +427,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                                 <svg class="icon" viewBox="0 0 24 24">
                                     <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
                                 </svg>
-                                Unggah Dokumen
+                                Unduh Dokumen
                             </a>
                             <a href="#" class="btn btn-secondary">
                                 <svg class="icon" viewBox="0 0 24 24">
@@ -483,14 +437,14 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="approval-panel">
                 <h2>📋 Panel Approval</h2>
                 
                 <div class="current-status">
-                    Status Saat Ini: <strong>Exempted</strong>
+                    Status Saat Ini: <strong>Expedited</strong>
                 </div>
 
                 <div class="status-update">
@@ -514,25 +468,25 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                     </ul>
                 </div>
 
-                <!-- <div class="comment-section">
+                <div class="comment-section">
                     <label for="comment">Catatan/Komentar:</label>
                     <textarea id="comment" class="comment-textarea" placeholder="Berikan catatan atau komentar untuk peneliti..."></textarea>
-                </div> -->
+                </div>
 
-                <!-- <div class="action-buttons">
+                <div class="action-buttons">
                     <button class="btn btn-approve" onclick="approveResearch()">
                         <svg class="icon" viewBox="0 0 24 24">
                             <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
                         </svg>
-                        Kirim
+                        Approve
                     </button>
                     <button class="btn btn-reject" onclick="rejectResearch()">
                         <svg class="icon" viewBox="0 0 24 24">
                             <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
                         </svg>
-                        Batal
+                        Reject
                     </button>
-                </div> -->
+                </div>
             </div>
         </div>
 
@@ -543,7 +497,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                     <div class="progress-circle">1</div>
                     <div class="progress-label">Submitted</div>
                 </div>
-                <div class="progress-step active">
+                <div class="progress-step">
                     <div class="progress-circle">2</div>
                     <div class="progress-label">Dokumen Etik</div>
                 </div>
@@ -558,7 +512,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             </div>
             
             <div class="alert alert-info">
-                <strong>Info:</strong> Berkas saat ini sedang dalam tahap review dokumen etik. Silakan periksa kelengkapan dokumen dan berikan status yang sesuai.
+                <strong>Info:</strong> Berkas yang sudah disubmit masih memerlukan perbaikan sesuai usulan dari approval
             </div>
         </div>
     </div>
@@ -637,8 +591,10 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             } else {
                 // Mark steps as completed based on status
                 steps[0].classList.add('completed');
-                steps[1].classList.add('completed');
-                steps[2].classList.add('active');
+                
+                if (status === 'exempted' || status === 'expedited' || status === 'full-board') {
+                    steps[1].classList.add('active');
+                }
                 
                 const statusText = {
                     'exempted': 'Exempted',
@@ -646,7 +602,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                     'full-board': 'Full Board'
                 };
                 
-                currentStatus.innerHTML = `Status Saat Ini: <strong>${statusText[status] || 'Penilaian'}</strong>`;
+                currentStatus.innerHTML = `Status Saat Ini: <strong>${statusText[status] || 'Dokumen Etik'}</strong>`;
                 currentStatus.style.background = 'linear-gradient(135deg, #00b894 0%, #00cec9 100%)';
                 currentStatus.style.color = 'white';
             }

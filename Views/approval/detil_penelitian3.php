@@ -1,56 +1,9 @@
-<?php
-$id = $_GET['id'] ?? null;
-
-$penelitianList = [
-  1 => [
-    'judul' => 'Studi Efektivitas Obat ABC',
-    'nama' => 'Muhammad Fauzan',
-    'file' => '1720000000_proposal_efektivitas_obat_abc.pdf',
-    'status' => 'siap-unggah',
-  ],
-  2 => [
-    'judul' => 'Pengaruh Pola Tidur Mahasiswa',
-    'nama' => 'Fanny Septi Nurcahyani',
-    'file' => '1720000001_tidur_mahasiswa.pdf',
-    'status' => 'submitted',
-  ],
-  3 => [
-    'judul' => 'Evaluasi Kualitas Tidur Pasien Rawat Inap',
-    'nama' => 'Rasyiddin Permana',
-    'file' => '1720000002_kualitas_tidur.pdf',
-    'status' => 'dinilai',
-  ],
-  4 => [
-    'judul' => 'Analisis Gaya Hidup Pasien Diabetes',
-    'nama' => 'Fanny Septi Nurcahyani',
-    'file' => '1720000003_gaya_hidup.pdf',
-    'status' => 'selesai',
-  ],
-  5 => [
-    'judul' => 'Evaluasi Sistem Pelayanan Gizi di Rumah Sakit',
-    'nama' => 'Muhammad Fauzan',
-    'file' => '1720000003_sistem_pelayanan_gizi.pdf',
-    'status' => 'revisi',
-  ],
-];
-
-if (!isset($penelitianList[$id])) {
-  echo "Penelitian tidak ditemukan.";
-  exit;
-}
-
-$data = $penelitianList[$id];
-
-$stepMap = ['submitted' => 1, 'siap-unggah' => 2, 'dinilai' => 3, 'selesai' => 4, 'revisi' => 5];
-$activeStep = $stepMap[$data['status']] ?? 1;
-?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Penelitian - Approval</title>
+    <title>Detail Penelitian - Full Board Review</title>
     <style>
         * {
             margin: 0;
@@ -180,7 +133,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
         }
 
         .current-status {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
             color: #2d3436;
             padding: 15px;
             border-radius: 12px;
@@ -190,102 +143,69 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             font-size: 1.1em;
         }
 
-        .status-update {
+        .presentation-notice {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
             margin-bottom: 25px;
+            text-align: center;
         }
 
-        .status-update label {
-            display: block;
-            margin-bottom: 12px;
-            color: #2c3e50;
-            font-weight: 600;
-            font-size: 1.1em;
+        .presentation-notice h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
         }
 
-        .status-select {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e8ecf3;
-            border-radius: 10px;
+        .presentation-notice p {
+            margin-bottom: 15px;
             font-size: 1.05em;
+        }
+
+        .schedule-info {
             background: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .status-select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .status-descriptions {
-            background: #f8f9fa;
             padding: 20px;
             border-radius: 10px;
-            margin-bottom: 25px;
+            margin-top: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
-        .status-descriptions h4 {
-            color: #495057;
+        .schedule-info h4 {
+            color: #2c3e50;
             margin-bottom: 15px;
-            font-size: 1.1em;
+            font-size: 1.2em;
         }
 
-        .status-descriptions ul {
-            list-style: none;
-            padding-left: 0;
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
         }
 
-        .status-descriptions li {
-            margin-bottom: 12px;
-            padding: 10px;
-            background: white;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
+        .schedule-item:last-child {
+            border-bottom: none;
         }
 
-        .status-descriptions li strong {
-            color: #2c3e50;
-        }
-
-        .comment-section {
-            margin-bottom: 25px;
-        }
-
-        .comment-section label {
-            display: block;
-            margin-bottom: 12px;
-            color: #2c3e50;
+        .schedule-label {
             font-weight: 600;
-            font-size: 1.1em;
+            color: #2c3e50;
         }
 
-        .comment-textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e8ecf3;
-            border-radius: 10px;
-            font-size: 1em;
-            font-family: inherit;
-            resize: vertical;
-            min-height: 120px;
-            transition: all 0.3s ease;
-        }
-
-        .comment-textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        .schedule-value {
+            color: #495057;
+            font-size: 1.05em;
         }
 
         .action-buttons {
             display: flex;
             gap: 15px;
+            margin-top: 25px;
         }
 
-        .btn-approve {
-            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        .btn-schedule {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
             color: white;
             flex: 1;
             padding: 15px;
@@ -293,13 +213,22 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             font-weight: 600;
         }
 
-        .btn-reject {
-            background: linear-gradient(135deg, #d63031 0%, #e17055 100%);
+        .btn-postpone {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
             color: white;
             flex: 1;
             padding: 15px;
             font-size: 1.1em;
             font-weight: 600;
+        }
+
+        .progress-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8ecf3;
+            margin-top: 25px;
         }
 
         .progress-section {
@@ -374,11 +303,6 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             color: white;
         }
 
-        .progress-step.active .progress-circle {
-            background: #667eea;
-            color: white;
-        }
-
         .progress-label {
             margin-top: 10px;
             font-size: 0.9em;
@@ -399,16 +323,102 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             border: 1px solid transparent;
         }
 
-        .alert-info {
-            background: #d1ecf1;
-            border-color: #bee5eb;
-            color: #0c5460;
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+
+        .committee-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .committee-info h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .committee-member {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .committee-member:last-child {
+            border-bottom: none;
+        }
+
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .member-role {
+            font-size: 0.9em;
+            color: #6c757d;
         }
 
         .icon {
             width: 16px;
             height: 16px;
             fill: currentColor;
+        }
+
+        .requirements-section {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #00b894;
+        }
+
+        .requirements-section h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .requirements-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .requirements-list li {
+            padding: 8px 0;
+            color: #495057;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .requirements-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00b894;
+            font-weight: 600;
         }
 
         @media (max-width: 768px) {
@@ -426,6 +436,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
     <div class="container">
         <div class="header">
             <h1>🔍 Detail Penelitian</h1>
+            <p></p>
         </div>
 
         <div class="main-content">
@@ -441,8 +452,8 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                 </div>
 
                 <div class="detail-row">
-                    <div class="detail-label">Tanggal:</div>
-                    <div class="detail-value">05 Juli 2025</div>
+                    <div class="detail-label">Tanggal</div>
+                    <div class="detail-value">20 Juni 2025</div>
                 </div>
                 
                 <div class="detail-row">
@@ -465,7 +476,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                     </div>
                 </div>
                 
-                <div class="detail-row">
+                <!-- <div class="detail-row">
                     <div class="detail-label">Unggah Dokumen Etik:</div>
                     <div class="detail-value">
                         <div class="file-actions">
@@ -473,7 +484,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                                 <svg class="icon" viewBox="0 0 24 24">
                                     <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
                                 </svg>
-                                Unggah Dokumen
+                                Unduh Dokumen
                             </a>
                             <a href="#" class="btn btn-secondary">
                                 <svg class="icon" viewBox="0 0 24 24">
@@ -483,56 +494,97 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="approval-panel">
-                <h2>📋 Panel Approval</h2>
+                <h2>📋 Status Full Board</h2>
                 
                 <div class="current-status">
-                    Status Saat Ini: <strong>Exempted</strong>
+                    Status Saat Ini: <strong>Full Board Review</strong>
                 </div>
 
-                <div class="status-update">
-                    <label for="status-select">Pilih Status Baru:</label>
-                    <select id="status-select" class="status-select">
-                        <option value="">-- Pilih Status --</option>
-                        <option value="exempted">Exempted</option>
-                        <option value="expedited">Expedited</option>
-                        <option value="full-board">Full Board</option>
-                        <option value="discontinuing">Discontinuing</option>
-                    </select>
+                <div class="presentation-notice">
+                    <h3>📅 Jadwal Presentasi</h3>
+                    <p>Pemohon dijadwalkan untuk presentasi di hadapan Komisi Etik Penelitian Kesehatan</p>
+                    
+                    <div class="schedule-info">
+                        <h4>Detail Jadwal:</h4>
+                        <div class="schedule-item">
+                            <div class="schedule-label">Tanggal:</div>
+                            <div class="schedule-value">Selasa, 15 Juli 2025</div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-label">Waktu:</div>
+                            <div class="schedule-value">09:00 - 10:30 WIB</div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-label">Tempat:</div>
+                            <div class="schedule-value">Ruang Komisi Etik, Gedung A Lt. 3</div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-label">Durasi:</div>
+                            <div class="schedule-value">90 menit (60 menit presentasi + 30 menit Q&A)</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="status-descriptions">
-                    <h4>📝 Keterangan Status:</h4>
-                    <ul>
-                        <li><strong>Exempted:</strong> Penelitian dinyatakan layak dan diterbitkan surat kelayakan etik</li>
-                        <li><strong>Expedited:</strong> Usulan diklarifikasi atau perlu diperbaiki sesuai masukan penelaah</li>
-                        <li><strong>Full Board:</strong> Pemohon dijadwalkan untuk presentasi di hadapan Komisi Etik Penelitian Kesehatan</li>
-                        <li><strong>Discontinuing:</strong> Usulan tidak disetujui secara etik dan dapat diajukan ulang setelah direvisi</li>
+                <div class="requirements-section">
+                    <h4>📋 Persyaratan Presentasi:</h4>
+                    <ul class="requirements-list">
+                        <li>Menyiapkan slide presentasi (maksimal 20 slide)</li>
+                        <li>Membawa hard copy proposal penelitian</li>
+                        <li>Membawa dokumen pendukung lainnya</li>
+                        <li>Konfirmasi kehadiran H-1 presentasi</li>
                     </ul>
                 </div>
 
-                <!-- <div class="comment-section">
-                    <label for="comment">Catatan/Komentar:</label>
-                    <textarea id="comment" class="comment-textarea" placeholder="Berikan catatan atau komentar untuk peneliti..."></textarea>
-                </div> -->
+                <div class="committee-info">
+                    <h4>👥 Komisi Etik yang Akan Hadir:</h4>
+                    <div class="committee-member">
+                        <div class="member-avatar">DR</div>
+                        <div class="member-info">
+                            <div class="member-name">Dr. Sarah Wijaya, M.D.</div>
+                            <div class="member-role">Ketua Komisi Etik</div>
+                        </div>
+                    </div>
+                    <div class="committee-member">
+                        <div class="member-avatar">PR</div>
+                        <div class="member-info">
+                            <div class="member-name">Prof. Ahmad Rahman, Ph.D.</div>
+                            <div class="member-role">Ahli Bioetika</div>
+                        </div>
+                    </div>
+                    <div class="committee-member">
+                        <div class="member-avatar">DR</div>
+                        <div class="member-info">
+                            <div class="member-name">Dr. Lisa Chen, M.Sc.</div>
+                            <div class="member-role">Ahli Metodologi</div>
+                        </div>
+                    </div>
+                    <div class="committee-member">
+                        <div class="member-avatar">MR</div>
+                        <div class="member-info">
+                            <div class="member-name">Maria Rodriguez, S.H.</div>
+                            <div class="member-role">Perwakilan Hukum</div>
+                        </div>
+                    </div>
+                </div>
 
-                <!-- <div class="action-buttons">
-                    <button class="btn btn-approve" onclick="approveResearch()">
+                <div class="action-buttons">
+                    <button class="btn btn-schedule" onclick="confirmPresentation()">
                         <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                            <path d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z"/>
                         </svg>
-                        Kirim
+                        Konfirmasi Kehadiran
                     </button>
-                    <button class="btn btn-reject" onclick="rejectResearch()">
+                    <button class="btn btn-postpone" onclick="requestReschedule()">
                         <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                            <path d="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
                         </svg>
-                        Batal
+                        Minta Reschedule
                     </button>
-                </div> -->
+                </div>
             </div>
         </div>
 
@@ -543,13 +595,13 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                     <div class="progress-circle">1</div>
                     <div class="progress-label">Submitted</div>
                 </div>
-                <div class="progress-step active">
+                <div class="progress-step">
                     <div class="progress-circle">2</div>
                     <div class="progress-label">Dokumen Etik</div>
                 </div>
                 <div class="progress-step">
                     <div class="progress-circle">3</div>
-                    <div class="progress-label">Penilaian</div>
+                    <div class="progress-label">Full Board Review</div>
                 </div>
                 <div class="progress-step">
                     <div class="progress-circle">4</div>
@@ -557,41 +609,35 @@ $activeStep = $stepMap[$data['status']] ?? 1;
                 </div>
             </div>
             
-            <div class="alert alert-info">
-                <strong>Info:</strong> Berkas saat ini sedang dalam tahap review dokumen etik. Silakan periksa kelengkapan dokumen dan berikan status yang sesuai.
+            <div class="alert alert-warning">
+                <strong>Penting:</strong> Penelitian ini memerlukan review lengkap oleh komisi etik. Pemohon akan mempresentasikan penelitiannya di hadapan komisi untuk evaluasi komprehensif.
             </div>
         </div>
     </div>
 
     <script>
-        function approveResearch() {
-            const status = document.getElementById('status-select').value;
-            const comment = document.getElementById('comment').value;
-            
-            if (!status) {
-                alert('Silakan pilih status terlebih dahulu!');
-                return;
-            }
-            
-            if (confirm(`Apakah Anda yakin ingin menyetujui penelitian dengan status "${status}"?`)) {
-                // Simulate API call
-                showNotification('Penelitian berhasil disetujui!', 'success');
-                updateProgressBar(status);
+        function confirmPresentation() {
+            if (confirm('Apakah Anda yakin akan menghadiri presentasi sesuai jadwal yang telah ditentukan?')) {
+                showNotification('Kehadiran berhasil dikonfirmasi! Reminder akan dikirim H-1 presentasi.', 'success');
+                
+                // Update button status
+                const confirmBtn = document.querySelector('.btn-schedule');
+                confirmBtn.innerHTML = `
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                    </svg>
+                    Kehadiran Dikonfirmasi
+                `;
+                confirmBtn.style.background = 'linear-gradient(135deg, #00b894 0%, #00cec9 100%)';
+                confirmBtn.disabled = true;
+                confirmBtn.style.cursor = 'not-allowed';
             }
         }
         
-        function rejectResearch() {
-            const comment = document.getElementById('comment').value;
-            
-            if (!comment.trim()) {
-                alert('Silakan berikan alasan penolakan!');
-                return;
-            }
-            
-            if (confirm('Apakah Anda yakin ingin menolak penelitian ini?')) {
-                // Simulate API call
-                showNotification('Penelitian ditolak!', 'error');
-                updateProgressBar('rejected');
+        function requestReschedule() {
+            const reason = prompt('Mohon berikan alasan untuk reschedule:');
+            if (reason && reason.trim()) {
+                showNotification('Permintaan reschedule telah dikirim ke komisi etik.', 'info');
             }
         }
         
@@ -606,9 +652,12 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             notification.style.fontWeight = '600';
             notification.style.zIndex = '1000';
             notification.style.animation = 'slideIn 0.3s ease';
+            notification.style.maxWidth = '300px';
             
             if (type === 'success') {
                 notification.style.background = 'linear-gradient(135deg, #00b894 0%, #00cec9 100%)';
+            } else if (type === 'info') {
+                notification.style.background = 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)';
             } else {
                 notification.style.background = 'linear-gradient(135deg, #d63031 0%, #e17055 100%)';
             }
@@ -618,38 +667,7 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             
             setTimeout(() => {
                 notification.remove();
-            }, 3000);
-        }
-        
-        function updateProgressBar(status) {
-            const steps = document.querySelectorAll('.progress-step');
-            const currentStatus = document.querySelector('.current-status');
-            
-            // Reset all steps
-            steps.forEach(step => {
-                step.classList.remove('active', 'completed');
-            });
-            
-            if (status === 'rejected' || status === 'discontinuing') {
-                currentStatus.innerHTML = 'Status Saat Ini: <strong>Ditolak</strong>';
-                currentStatus.style.background = 'linear-gradient(135deg, #d63031 0%, #e17055 100%)';
-                currentStatus.style.color = 'white';
-            } else {
-                // Mark steps as completed based on status
-                steps[0].classList.add('completed');
-                steps[1].classList.add('completed');
-                steps[2].classList.add('active');
-                
-                const statusText = {
-                    'exempted': 'Exempted',
-                    'expedited': 'Expedited',
-                    'full-board': 'Full Board'
-                };
-                
-                currentStatus.innerHTML = `Status Saat Ini: <strong>${statusText[status] || 'Penilaian'}</strong>`;
-                currentStatus.style.background = 'linear-gradient(135deg, #00b894 0%, #00cec9 100%)';
-                currentStatus.style.color = 'white';
-            }
+            }, 5000);
         }
         
         // Add animation styles
@@ -658,6 +676,16 @@ $activeStep = $stepMap[$data['status']] ?? 1;
             @keyframes slideIn {
                 from { transform: translateX(100%); opacity: 0; }
                 to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            
+            .presentation-notice {
+                animation: pulse 2s ease-in-out infinite;
             }
         `;
         document.head.appendChild(style);
